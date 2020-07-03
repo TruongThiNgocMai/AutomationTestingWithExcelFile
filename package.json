@@ -1,17 +1,24 @@
 {
-  "name": "testexcel",
+  "name": "excel_file_testing",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "cy:run": "cypress run --headless -b chrome",
-    "cy:open": "cypress open",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "cypress": "^4.9.0",
-    "node-xlsx": "^0.15.0"
+    "cypress-cucumber-preprocessor": "^2.5.1",
+    "cypress-xpath": "^1.6.0"
+  },
+  "cypress-cucumber-preprocessor": {
+    "stepDefinitions": "cypress/integration"
+  },
+  "dependencies": {
+    "exceljs": "^4.1.0",
+    "file-saver": "^2.0.2",
+    "xlsx": "^0.16.3"
   }
 }
