@@ -13,10 +13,10 @@
   "nameNotCreatedBefore": "Auto",
   "userNameCreatedBefore": "TruongPhong",
   "userNameNotCreatedBefore": "Ngoc Mai",
-  "fromNumber": 300602020,
-  "sourceNumber": "T4300602020",
+  "fromNumber": "06072020",
+  "sourceNumber": "T206072020",
   "publisher": "Cục Bưu Chính",
-  "title": "News Information",
-  "contentdemo": "Have a nice day!",
+  "title": "Mid Year Party",
+  "contentdemo": "This is demo of automation testing. Have a nice day!",
   "emailForgotPassword": "mai.truong@student.passerellesnumeriques.org"
 }

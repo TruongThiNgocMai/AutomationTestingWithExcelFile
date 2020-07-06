@@ -103,7 +103,7 @@ And(/^I login successfully to Dana train Page with manager account to check the 
 
     // Create workbook & add worksheet
     const workbook = new Excel.Workbook()
-    const worksheet = workbook.addWorksheet('ExampleSheet [' + fromDate + ']')
+    const worksheet = workbook.addWorksheet('DataForCreateDispatch [' + fromDate + ']')
 
     // add column headers
     worksheet.columns = [
@@ -132,7 +132,7 @@ And(/^I login successfully to Dana train Page with manager account to check the 
 
     // save workbook to disk
     workbook.xlsx.writeBuffer()
-        .then(buffer => FileSaver.saveAs(new Blob([buffer]), 'newfile.xlsx'))
+        .then(buffer => FileSaver.saveAs(new Blob([buffer]), 'Data For Create Dispatch.xlsx'))
         .catch(err => console.log('Error writing excel export', err))
 })
 
