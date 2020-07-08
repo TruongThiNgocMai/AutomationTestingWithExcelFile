@@ -42,3 +42,9 @@ Cypress.Commands.add('LogoutDanaFunctionForWebMac', () => {
     cy.get('.ant-avatar').click()
     cy.get('.ant-dropdown-menu > :nth-child(3)').click();
 })
+
+Cypress.Commands.add('LogoutDanaFunctionForPhoneVT', () => {
+    cy.get('[href="/profile"]').click()
+    cy.get('.sc-fznOgF > .ant-btn').scrollIntoView().click()
+    cy.get('.ant-popover-buttons > .ant-btn-primary').click()
+})

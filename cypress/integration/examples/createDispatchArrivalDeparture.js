@@ -83,27 +83,11 @@ And(/^I login successfully to Dana train Page with manager account to check the 
     //get current date
     const fromDate = Cypress.moment().format("DD-MM-YYYY")
 
-    //     //=====================USING XLSX========================
-    //     //create a new workbook - an excel file
-    //     const newWB = xlsx.utils.book_new();
-
-    //     //get data
-    //     const ws_data = [[createDispatch.usernameVT, createDispatch.passwordVT, createDispatch.usernameGD, createDispatch.passwordGD]];
-
-    //     //converts an array of JS objects to a worksheet
-    //     const newWS = xlsx.utils.json_to_sheet(ws_data);
-
-    //     //save into excel with sheetname and datetime
-    //     xlsx.utils.book_append_sheet(newWB, newWS, "P" + " {" + fromDate + "}");
-
-    //     //name of excel file
-    //     xlsx.writeFile(newWB, "P.xlsx");
-    // })
     //=========================USING EXCELJS=========================
 
     // Create workbook & add worksheet
     const workbook = new Excel.Workbook()
-    const worksheet = workbook.addWorksheet('DataForCreateDispatch [' + fromDate + ']')
+    const worksheet = workbook.addWorksheet('DataForCreateDispatch')
 
     // add column headers
     worksheet.columns = [
@@ -132,9 +116,6 @@ And(/^I login successfully to Dana train Page with manager account to check the 
 
     // save workbook to disk
     workbook.xlsx.writeBuffer()
-        .then(buffer => FileSaver.saveAs(new Blob([buffer]), 'Data For Create Dispatch.xlsx'))
+        .then(buffer => FileSaver.saveAs(new Blob([buffer]), 'Data For Create Dispatch [' + fromDate + ']' + '.xlsx'))
         .catch(err => console.log('Error writing excel export', err))
 })
-
-
-
