@@ -1,24 +1,38 @@
 {
-  "name": "excel_file_testing",
+  "name": "dana_train",
   "version": "1.0.0",
-  "description": "",
+  "description": "dana train website",
   "main": "index.js",
+  "dependencies": {
+    "cross-blob": "^2.0.0",
+    "exceljs": "^4.1.0",
+    "file-saver": "^2.0.2",
+    "fs": "0.0.1-security",
+    "jszip": "^3.5.0",
+    "node-xlsx": "^0.15.0",
+    "read-excel-file": "^4.0.6",
+    "xlsx": "^0.16.3",
+    "xlsx-browserify-shim": "0.0.5",
+    "xlsx-parse-json": "^3.1.0",
+    "xlsx-to-json": "^0.3.0"
+  },
+  "devDependencies": {
+    "cucumber-html-reporter": "^5.2.0",
+    "cypress": "^4.9.0",
+    "cypress-cucumber-preprocessor": "^2.5.0",
+    "cypress-file-upload": "^4.0.7",
+    "cypress-xpath": "^1.6.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "cypress": "^4.9.0",
-    "cypress-cucumber-preprocessor": "^2.5.1",
-    "cypress-xpath": "^1.6.0"
+  "repository": {
+    "type": "git",
+    "url": " "
   },
   "cypress-cucumber-preprocessor": {
-    "stepDefinitions": "cypress/integration"
+    "stepDefinitions": "cypress/integration/stepExecuteDanatrain"
   },
-  "dependencies": {
-    "exceljs": "^4.1.0",
-    "file-saver": "^2.0.2",
-    "xlsx": "^0.16.3"
-  }
+  "author": "mai.truong",
+  "license": "ISC"
 }

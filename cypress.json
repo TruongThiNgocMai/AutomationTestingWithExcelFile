@@ -1,3 +1,9 @@
 {
-    "testFiles": "**/*.feature"
+    "testFiles": "**/*.feature",
+    "watchForFileChanges": false,
+    "defaultCommandTimeout": 30000,
+    "requestTimeout": 30000,
+    "viewportWidth": 1920,
+    "viewportHeight": 1080,
+    "modifyObstructiveCode": false
 }

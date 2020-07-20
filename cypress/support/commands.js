@@ -1,5 +1,5 @@
 const urlDanatrain = 'https://dana-train-web-admin-stg.enouvo.com/'
-
+const fromDate = Cypress.moment().format('DD-MM-YYYY')
 //--------------Function For Login Successfully to Dana Train Website---------------
 
 Cypress.Commands.add('LoginDanaFunction', (username, password) => {
@@ -8,6 +8,21 @@ Cypress.Commands.add('LoginDanaFunction', (username, password) => {
     cy.get('#password').click().type(password);
     cy.get('.ant-btn').click();
     cy.wait(3000);
+})
+
+//--------------Function For Open A New Tab---------------
+
+Cypress.Commands.add('openWindow', (url) => {
+    return new Promise(resolve => {
+        if (window.top.aut) {
+            console.log('window exists already')
+            window.top.aut.close()
+        }
+        window.top.aut = window.top.open(url, 'aut')
+        setTimeout(() => {
+            resolve()
+        }, 500)
+    })
 })
 
 //--------------Function For Upload A New Image/File---------------
@@ -28,19 +43,89 @@ Cypress.Commands.add('newUploadBlobFile', (fileName, fileType) => {
     cy.wait(5000)
 })
 
+function makeid(length) {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
+
+//--------------Function For Writing Data From Array to Excel File Using XLSX---------------
+
+Cypress.Commands.add('writeDataFromArrayToExcel', (dataTest) => {
+    const XLSX = require('xlsx')
+    const saveAs = require('file-saver');
+    const Blob = require('cross-blob');
+
+    var wb = XLSX.utils.book_new();
+
+    for (var i in dataTest) {
+        var val = dataTest[i];
+        let arrHeader = [];
+        let arrValue = [];
+
+        for (var j in val) {
+            var header = j;
+            var value = val[j]
+            arrHeader.push(header);
+            arrValue.push(value)
+        }
+
+        var Heading = [arrHeader];
+        var Data = [arrValue];
+
+        var ws = XLSX.utils.aoa_to_sheet(Heading);
+        XLSX.utils.sheet_add_json(ws, Data, {
+            skipHeader: true,
+            origin: -1
+        });
+
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet' + makeid(5) + ' {' + fromDate + '}');
+    }
+
+    var wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+    saveAs(new Blob([wbout], { type: 'application/octet-stream' }), 'Data Login' + ' [' + fromDate + ']' + '.xlsx');
+})
+
+//--------------Function For Writing Data From Array to Json File Using XLSX---------------
+
+Cypress.Commands.add('writeDataFromArrayToJson', (dataTest) => {
+    cy.writeFile("cypress/fixtures/testdata" + " [" + fromDate + "]" + ".json", dataTest);
+})
+
+//======================FUNCTION FOR WEBSITE AND MACBOOK==========================
+
+Cypress.Commands.add('LogoutDanaFunctionForWebMac', () => {
+    //Cause have cy.reload() function, so we need handle click on X icon on the form to logout
+    cy.get('.h4 > .anticon').click()
+    cy.get('.rightHeader > .ant-avatar').click()
+    cy.get('.ant-dropdown-menu > :nth-child(3)').click();
+})
+
+Cypress.Commands.add('LogoutDanaFunctionForWebMacVT', () => {
+    //VT account just create a new dispatch, so this account do not need cy.reload() function
+    cy.get('.rightHeader > .ant-avatar').click({ force: true });
+    cy.get('.ant-dropdown-menu > :nth-child(3)').click();
+})
+
+//======================FUNCTION FOR MOBILE PHONE==========================
+
 //Cause after create a new dispatch, manager account login recently so do not visit to url
-Cypress.Commands.add('LoginDanaFunctionToCheckDispatch', (username, password) => {
+Cypress.Commands.add('LoginDanaFunctionToCheck', (username, password) => {
     cy.get('#username').click().type(username);
     cy.get('#password').click().type(password);
     cy.get('.ant-btn').click();
     cy.wait(3000);
 })
 
-Cypress.Commands.add('LogoutDanaFunctionForWebMac', () => {
-    //Cause have cy.reload() function, so we need handle click on X icon on the form to logout
-    cy.get('.h4 > .anticon').click()
-    cy.get('.ant-avatar').click()
-    cy.get('.ant-dropdown-menu > :nth-child(3)').click();
+//Cause the xpath of VT account icon and other account icon are different 
+Cypress.Commands.add('LogoutDanaFunctionForPhone', () => {
+    cy.get('[href="/profile"]').click()
+    cy.get('.sc-fznOgF > .ant-btn').scrollIntoView().click()
+    cy.get('.ant-popover-buttons > .ant-btn-primary').click()
 })
 
 Cypress.Commands.add('LogoutDanaFunctionForPhoneVT', () => {
@@ -48,3 +133,5 @@ Cypress.Commands.add('LogoutDanaFunctionForPhoneVT', () => {
     cy.get('.sc-fznOgF > .ant-btn').scrollIntoView().click()
     cy.get('.ant-popover-buttons > .ant-btn-primary').click()
 })
+
+
