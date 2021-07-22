@@ -11,7 +11,7 @@
     "jszip": "^3.5.0",
     "node-xlsx": "^0.15.0",
     "read-excel-file": "^4.0.6",
-    "xlsx": "^0.16.3",
+    "xlsx": "^0.17.0",
     "xlsx-browserify-shim": "0.0.5",
     "xlsx-parse-json": "^3.1.0",
     "xlsx-to-json": "^0.3.0"
