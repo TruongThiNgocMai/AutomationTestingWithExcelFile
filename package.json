@@ -10,7 +10,7 @@
     "fs": "0.0.1-security",
     "jszip": "^3.5.0",
     "node-xlsx": "^0.15.0",
-    "read-excel-file": "^4.0.6",
+    "read-excel-file": "^5.5.1",
     "xlsx": "^0.16.3",
     "xlsx-browserify-shim": "0.0.5",
     "xlsx-parse-json": "^3.1.0",
